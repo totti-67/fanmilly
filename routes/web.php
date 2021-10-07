@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('home', 'Admin\FanmillyController@home')->middleware('auth');
+    Route::get('chat', 'Admin\FanmillyController@chat')->middleware('auth');
+    Route::get('mypage', 'Admin\FanmillyController@mypage')->middleware('auth');
+});
